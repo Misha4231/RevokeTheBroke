@@ -1,0 +1,20 @@
+{% extends "categories/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="row auth-form-container">
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            <fieldset>
+                {{ form }}
+            </fieldset>
+
+            <div class="auth-form-bottom">
+                <button class="blue-btn" type="submit">Register</button>
+                <span>Already have an account? <a href="{% url 'login' %}">Sign in</a></span>
+            </div>
+        </form>
+    </div>
+{% endblock %}

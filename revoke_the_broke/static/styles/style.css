@@ -1,0 +1,56 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.medium-text {
+    font-size: 20px;
+}
+.blue-btn {
+    background-color: #3a94af;
+    color: white;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    padding: 5px 25px;
+    border-radius: 15px;
+}
+.blue-btn:hover {
+    background-color: #6bc0da;
+}
+.blue-btn:active {
+    background-color: #325a66;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: red;
+}
+header {
+    border-bottom: 2px black solid;
+    margin-bottom: 10px;
+}
+.header-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: auto;
+}
+.auth-form-container .auth-form-bottom {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.auth-form fieldset div {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}

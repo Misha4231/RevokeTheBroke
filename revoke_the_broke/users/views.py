@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 
-# Create your views here.
+
 def register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
@@ -13,7 +15,7 @@ def register(request):
             form.save()
 
             messages.success(request, f'Your account has been created ! You are now able to log in')
-            return redirect('users.login')
+            return redirect('login')
     else:
         form = UserRegisterForm()
 
@@ -26,11 +28,16 @@ def login(request):
         user = authenticate(request, username = username, password = password)
 
         if user is not None:
-            form = login(request, user)
+            form = auth_login(request, user)
 
-            return redirect('categories.index')
+            return redirect('index')
         else:
             messages.info(request, f'invalid credentials')
 
     form = AuthenticationForm()
-    return render(request, 'user/login.html', {'form':form})
+    return render(request, 'users/login.html', {'form':form})
+
+def logout(request):
+    auth_logout(request)
+
+    return redirect('login')
