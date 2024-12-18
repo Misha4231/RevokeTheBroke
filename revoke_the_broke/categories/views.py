@@ -4,9 +4,15 @@ from django.conf import settings
 from .models import Category
 
 def index(request):
-    
-
-    return render(request, 'categories/index.html')
+    categories = []
+    if request.user.is_authenticated:
+        categories = Category.objects.filter(author__pk = request.user.pk).all()
+    else:
+        incognito_token = request.COOKIES.filter('incognito_token')
+        if incognito_token:
+            categories = Category.objects.filter(incognito_user_token = incognito_token).all()
+            
+    return render(request, 'categories/index.html', {'categories': categories})
 
 
 # funkcja pomocnicza dla ustalenia cookie (głównie jest wykorzystywana dla trybu incognito)
@@ -16,7 +22,7 @@ def set_cookie(response, key, value, days_expire=7):
     else:
         max_age = days_expire * 24 * 60 * 60
     expires = datetime.datetime.strftime(
-        datetime.datetime.utcnow() + datetime.timedelta(seconds=max_age),
+        datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=max_age),
         "%a, %d-%b-%Y %H:%M:%S GMT",
     )
     response.set_cookie(

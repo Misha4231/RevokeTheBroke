@@ -1,9 +1,40 @@
 {% extends "categories/base.html" %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="row">
-        index
+    <div class="categories-list">
+        {% if categories|length > 0 %}
+            <h1>Categories: </h1>
+
+            {% for cat in categories %}
+                <div class="category" id="category-{{ cat.pk }}">
+                    <div class="category-info">
+                        <div class="category-info-left">
+                            <div class="category-colorbox" data-color="{{ cat.color }}"></div>
+                            <h3>{{ cat.title }}</h3>
+                        </div>
+                        <div class="expand-list-icon">
+                            <img src="{% static 'images/arrow-down.png' %}" data-open="{% static 'images/arrow-down.png' %}" data-close="{% static 'images/arrow-top.png' %}" alt="expand list">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="category-desctiption-container">
+                        
+                        <p>{{ cat.description }}</p>
+                        <br>
+                        <span>
+                            <sub>Added at:</sub>
+                            {{ cat.created_at }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/categories-list.js' %}"></script>
 {% endblock %}
