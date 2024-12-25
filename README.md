@@ -2,6 +2,23 @@
 
 RevokeTheBroke to aplikacja webowa do zarządzania wydatkami, która pozwala użytkownikom na łatwe śledzenie swoich finansów. Aplikacja oferuje możliwość tworzenia, edytowania i usuwania kategorii oraz wydatków. Dodatkowo, wprowadza mechanizm sesji użytkownika, dzięki czemu każda osoba może zarządzać swoimi wydatkami w sposób prywatny.
 
+## Kroki do uruchomienia
+### 1. Instalacja bibliotek
+```bash
+pip install -r req.txt
+```
+
+### 2. Migracje w bazie danych
+```bash
+python manage.py migrate
+```
+
+### 3. Uruchomienie aplikacji
+```bash
+python manage.py runserver
+```
+
+
 ## Funkcje
 
 - **CRUD dla kategorii** – Tworzenie, przeglądanie, edytowanie i usuwanie kategorii wydatków.
