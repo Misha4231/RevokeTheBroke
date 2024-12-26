@@ -57,6 +57,7 @@ header {
 
 .categories-list .category-info {
     display: flex;
+    align-items: baseline;
     justify-content: space-between;
 }
 .category-info-left {
@@ -64,8 +65,15 @@ header {
     display: flex;
     align-items: baseline;
 }
+.category-info-left * {
+    margin-left: 10px;
+}
 .category-info-left h3 {
     margin-bottom: 10px;
+}
+.category-info-left h3 a {color: black;}
+.category-info-left h3:hover {
+    text-decoration: underline;
 }
 .expand-list-icon {
     border-radius: 50%;
@@ -85,4 +93,7 @@ header {
 .expand-list-icon img {
     width: 30px;
     height: 30px;
+}
+.category-form input {
+    margin-bottom: 10px;
 }

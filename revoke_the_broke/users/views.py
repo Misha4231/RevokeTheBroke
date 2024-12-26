@@ -6,7 +6,11 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 
-
+''' 
+register function (/users/register/)
+    - handles both GET and POST methods
+    - uses default django register form
+'''
 def register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
@@ -21,6 +25,12 @@ def register(request):
 
     return render(request, 'users/register.html', {'form': form})
 
+''' 
+sign in function (/users/login/)
+    - handles both GET and POST methods
+    - check if user exists
+    - uses default django login form
+'''
 def login(request):
     if request.method == 'POST': 
         username = request.POST['username']
@@ -37,6 +47,7 @@ def login(request):
     form = AuthenticationForm()
     return render(request, 'users/login.html', {'form':form})
 
+# logs user out
 def logout(request):
     auth_logout(request)
 

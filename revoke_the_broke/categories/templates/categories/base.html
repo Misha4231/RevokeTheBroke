@@ -12,6 +12,7 @@
 <body>
     <header>
         <div class="header-content">
+            <a href="/" style="color: black;"><h1>Revoke <br>The Broke</h1></a>
             {% if user.is_authenticated %}
                 <h2>Hello {{ user.username }}!</h2>
                 <a class="medium-text" href="{% url 'logout' %}">Sign out</a>

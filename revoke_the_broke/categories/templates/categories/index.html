@@ -13,8 +13,18 @@
                     <div class="category-info">
                         <div class="category-info-left">
                             <div class="category-colorbox" data-color="{{ cat.color }}"></div>
-                            <h3>{{ cat.title }}</h3>
+                            <h3><a href="">{{ cat.title }}</a></h3>
+
+                            <div class="category-edit-icons">
+                                <a href="{% url 'update_category' cat.id %}">
+                                    <img src="{% static 'images/edit.png' %}" alt="Edit" width="24px">
+                                </a>
+                                <a href="{% url 'remove_category' cat.id %}">
+                                    <img src="{% static 'images/delete.png' %}" alt="Delete" width="24px">
+                                </a>
+                            </div>
                         </div>
+                        
                         <div class="expand-list-icon">
                             <img src="{% static 'images/arrow-top.png' %}" data-open="{% static 'images/arrow-down.png' %}" data-close="{% static 'images/arrow-top.png' %}" alt="expand list">
                         </div>
@@ -31,7 +41,13 @@
                     </div>
                 </div>
             {% endfor %}
+        {% else %}
+            <center>
+                <h1>No categories yet</h1>
+            </center>
         {% endif %}
+        <br><br>
+        <a href="{% url 'add_category' %}" class="blue-btn">Add new Category</a>
     </div>
 {% endblock %}
 
