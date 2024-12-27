@@ -5,14 +5,24 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from .forms import CategoryForm
 from .helper import set_cookie, get_categories
 from .decorators import with_category
+from spendings.models import Expenditure
 
 # Home page displaying a list of categories and a link to the form for adding a new category
 def index(request: HttpRequest):
     # Fetch categories, potentially from a cookie or session (helper function handles logic)
     categories = get_categories(request)
     
+    chart_data = {
+        'titles': [cat.title for cat in categories],
+        'colors': [cat.color for cat in categories],
+        'prices': []
+    }
+    for cat in categories:
+        exps = Expenditure.objects.filter(category=cat).all()
+        chart_data['prices'].append(sum(exp.price for exp in exps))
+    
     # Render the index page with the list of categories
-    return render(request, 'categories/index.html', {'categories': categories})
+    return render(request, 'categories/index.html', {'categories': categories, 'chart_data': chart_data})
 
 # Page containing the form to add a category; uses a Django ModelForm
 def add_category(request: HttpRequest):

@@ -41,6 +41,10 @@
                     </div>
                 </div>
             {% endfor %}
+
+            <div class="exp-pie">
+                <canvas id="PieChart" style="width:100%;max-width:600px"></canvas>
+            </div>
         {% else %}
             <center>
                 <h1>No categories yet</h1>
@@ -52,5 +56,10 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'scripts/categories-list.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        var chartData = {{ chart_data|safe }};
+    </script>
+    <script src="{% static 'scripts/categories_list.js' %}"></script>
+    <script src="{% static 'scripts/categories_stats.js' %}"></script>
 {% endblock %}
