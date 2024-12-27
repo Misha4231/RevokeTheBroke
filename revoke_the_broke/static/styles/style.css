@@ -97,3 +97,70 @@ header {
 .category-form input {
     margin-bottom: 10px;
 }
+
+
+.visualisation-options {
+    display: flex;
+    justify-content: right;
+    margin: 20px 0;
+}
+
+.visualisation-options div {
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s, background-color 0.2s;
+    border-radius: 8px;
+}
+
+.visualisation-options div:hover {
+    background-color: #f0f0f0; 
+    transform: scale(1.1);
+}
+.visualisation-options .choosen {
+    background-color: #adaaaa; 
+}
+.visualisation-options img {
+    display: block;
+    margin: 0 auto;
+}
+
+.exp-list-wrapper,
+.exp-pie-wrapper,
+.exp-bar-wrapper {
+    display: none;
+}
+
+.visible {
+
+    display: block;
+}
+.expenditures-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.expenditures-item {
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.expenditures-item.total {
+    font-weight: bold;
+    background-color: #f7f7f7;
+}
+
+canvas {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

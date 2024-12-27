@@ -13,7 +13,7 @@
                     <div class="category-info">
                         <div class="category-info-left">
                             <div class="category-colorbox" data-color="{{ cat.color }}"></div>
-                            <h3><a href="">{{ cat.title }}</a></h3>
+                            <h3><a href="{% url 'category_spendings' cat.pk %}">{{ cat.title }}</a></h3>
 
                             <div class="category-edit-icons">
                                 <a href="{% url 'update_category' cat.id %}">

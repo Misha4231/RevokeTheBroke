@@ -22,4 +22,5 @@ urlpatterns = [
 
     path('', include('categories.urls')),
     path('users/', include('users.urls')),
+    path('spendings/', include('spendings.urls'))
 ]

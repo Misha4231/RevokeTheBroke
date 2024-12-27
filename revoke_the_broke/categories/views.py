@@ -4,6 +4,7 @@ from .models import Category
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from .forms import CategoryForm
 from .helper import set_cookie, get_categories
+from .decorators import with_category
 
 # Home page displaying a list of categories and a link to the form for adding a new category
 def index(request: HttpRequest):
@@ -31,12 +32,8 @@ def add_category(request: HttpRequest):
             return render(request, 'categories/category_form.html', {'form': form, 'error_message': error_message})
 
 # View to update an existing category
-def update_category(request: HttpRequest, id: int):
-    # Fetch the category by ID using a helper function; return 404 if not found
-    category = get_categories(request, id)
-    if not category:
-        return HttpResponseNotFound("404 not found")
-    
+@with_category
+def update_category(request: HttpRequest, category: Category, *args, **kwargs):
     if request.method == 'POST':  # Handle POST request to submit updated category data
         form = CategoryForm(request.POST, instance=category)  # Bind form to existing instance
         if form.is_valid():
@@ -54,12 +51,8 @@ def update_category(request: HttpRequest, id: int):
         return render(request, 'categories/category_form.html', {'form': form, 'update': True})
 
 # View to delete an existing category
-def remove_category(request: HttpRequest, id: int):
-    # Fetch the category by ID using a helper function; return 404 if not found
-    category = get_categories(request, id)
-    if not category:
-        return HttpResponseNotFound("404 not found")
-    
+@with_category
+def remove_category(request: HttpRequest, category: Category, *args, **kwargs):
     # Delete the category object from the database
     category.delete()
     # Redirect to the index page after successful deletion

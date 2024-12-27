@@ -14,3 +14,13 @@
         <p>Error : {{ error_message }}</p>
     {% endif %}
 {% endblock %}
+
+{% block script %}
+    {% if not update %}
+        <script>// In case if user adds new category, he could be lazy to pick color, so code generate random one
+            var colorInput = document.querySelector('#id_color');
+            
+            colorInput.value = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+        </script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "categories/base.html" %}
+
+{% block title %}{% if update %}Update{% else %}Add{% endif %} {{ category.title }} expenditure{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <button type="submit" class="blue-btn">{% if update %}Update{% else %}Add{% endif %}</button>
+    </form>
+
+    {% if error_message %}
+        <p>Error : {{ error_message }}</p>
+    {% endif %}
+{% endblock %}
+

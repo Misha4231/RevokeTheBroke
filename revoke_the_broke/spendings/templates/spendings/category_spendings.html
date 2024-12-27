@@ -1,0 +1,73 @@
+{% extends "categories/base.html" %}
+{% load static %}
+
+{% block title %}{{ category.title }} expenditures{% endblock %}
+
+{% block content %}
+    <h1>{{ category.title }}: </h1>
+
+    {% if expenditures|length > 0 %}
+        <div class="visualisation-options">
+            <div id="list-option">
+                <img src="{% static 'images/list.png' %}" alt="List" width="30px">
+            </div>
+            <div id="pie-option">
+                <img src="{% static 'images/pie-chart.png' %}" alt="Pie" width="30px">
+            </div>
+            <div id="bar-option">
+                <img src="{% static 'images/bar-chart.png' %}" alt="Bar" width="30px">
+            </div>
+        </div>
+        
+        <!-- List View -->
+        <div class="exp-list-wrapper visible">
+            <ul class="expenditures-list">
+                {% for exp in expenditures %}
+                    <li class="expenditures-item">
+                        <div>
+                            <strong>{{ exp.title }}</strong>: ${{ exp.price }}<br>
+                            <small>{{ exp.description|default:"No description provided." }}</small>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="{% url 'edit_expenditure' category.pk exp.id %}" class="btn edit-btn">
+                                <img src="{% static 'images/edit.png' %}" alt="Edit" width="24px">
+                            </a>
+                            <a href="{% url 'delete_expenditure' category.pk exp.id %}" class="btn delete-btn" >
+                                <img src="{% static 'images/delete.png' %}" alt="Delete" width="24px">
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+                <li class="expenditures-item total">
+                    <strong>Total:</strong> ${{ chart_data.total_price }}
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Pie Chart View -->
+        <div class="exp-pie-wrapper">
+            <canvas id="PieChart" style="width:100%;max-width:600px"></canvas>
+        </div>
+        
+        <!-- Bar Chart View -->
+        <div class="exp-bar-wrapper">
+            <canvas id="BarChart" style="width:100%;max-width:600px"></canvas>
+        </div>
+    
+    {% else %}
+        <center>
+            <h2>No spendings yet</h2>
+        </center>
+    {% endif %}
+    
+    <br><br>
+    <a href="{% url 'add_expenditure' category.pk %}" class="blue-btn">Add new</a>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        var chartData = {{ chart_data|safe }};
+    </script>
+    <script src="{% static 'scripts/spengings_visualizations.js' %}"></script>
+{% endblock %}
