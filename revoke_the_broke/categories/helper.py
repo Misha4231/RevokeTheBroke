@@ -40,4 +40,4 @@ def get_categories(request: HttpRequest, id: int = -1):
             else:
                 return Category.objects.filter(incognito_user_token = incognito_token, pk=id).first()
         
-    return None
+    return []
