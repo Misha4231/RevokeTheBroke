@@ -31,7 +31,7 @@ def add_category(request: HttpRequest):
         return render(request, 'categories/category_form.html', {'form': form})
     elif request.method == 'POST':  # Handle POST request to submit form data
         form = CategoryForm(request.POST)
-        if form.is_valid(): 
+        if form.is_valid():
             # Redirect to the index page on successful form submission
             responce = redirect('index')
             # Save the category using a custom save method, which may handle cookies

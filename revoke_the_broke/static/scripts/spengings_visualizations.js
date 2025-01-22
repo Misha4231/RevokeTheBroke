@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var chartData = JSON.parse(document.querySelector("#chart_data").textContent);
+
     // Get references to the options and visualization wrappers
     const listOption = document.getElementById('list-option');
     const pieOption = document.getElementById('pie-option');
